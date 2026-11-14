@@ -1,0 +1,115 @@
+{
+  "members": [
+    {
+      "id": "a",
+      "boxes": 48,
+      "kg": 240,
+      "lane": "east",
+      "fresh": true,
+      "incompatible": []
+    },
+    {
+      "id": "b",
+      "boxes": 37,
+      "kg": 185,
+      "lane": "east",
+      "fresh": true,
+      "incompatible": []
+    },
+    {
+      "id": "c",
+      "boxes": 25,
+      "kg": 125,
+      "lane": "east",
+      "fresh": true,
+      "incompatible": [
+        "f"
+      ]
+    },
+    {
+      "id": "d",
+      "boxes": 62,
+      "kg": 310,
+      "lane": "south",
+      "fresh": true,
+      "incompatible": []
+    },
+    {
+      "id": "e",
+      "boxes": 18,
+      "kg": 90,
+      "lane": "south",
+      "fresh": true,
+      "incompatible": []
+    },
+    {
+      "id": "f",
+      "boxes": 15,
+      "kg": 130,
+      "lane": "east",
+      "fresh": false,
+      "incompatible": [
+        "c"
+      ]
+    }
+  ],
+  "fleet": [
+    {
+      "id": "small",
+      "max_boxes": 70,
+      "max_kg": 400,
+      "available": 1
+    },
+    {
+      "id": "large",
+      "max_boxes": 120,
+      "max_kg": 650,
+      "available": 1
+    }
+  ],
+  "tariffs": [
+    {
+      "vehicle": "small",
+      "lane": "east",
+      "base_cents": 16000,
+      "toll_cents": 1800,
+      "eligible_green": true
+    },
+    {
+      "vehicle": "large",
+      "lane": "east",
+      "base_cents": 22000,
+      "toll_cents": 2800,
+      "eligible_green": true
+    },
+    {
+      "vehicle": "small",
+      "lane": "south",
+      "base_cents": 19000,
+      "toll_cents": 2000,
+      "eligible_green": true
+    },
+    {
+      "vehicle": "large",
+      "lane": "south",
+      "base_cents": 26000,
+      "toll_cents": 3500,
+      "eligible_green": true
+    }
+  ],
+  "green_min_fill": 0.6,
+  "scenarios": [
+    {
+      "name": "a-expands",
+      "box_changes": {
+        "a": 80
+      }
+    },
+    {
+      "name": "large-shortage",
+      "fleet_changes": {
+        "large": 1
+      }
+    }
+  ]
+}
