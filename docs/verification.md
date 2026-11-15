@@ -5,4 +5,4 @@
 - 公平性和最小让步取舍
 - 情景敏感性及分币稳定性
 
-tests/test_domain.py 覆盖现有业务口径；tests/test_transport.py 通过真实本地 HTTP 验证数据到消费端。tests/test_acceptance.py 是新接口的公开契约测试，完成新能力后以 RUN_ACCEPTANCE=1 启用。它不替代统计正确性、不可识别性、组合约束和敏感性回归；请按 contracts.md 补足针对算法设计的测试。新接口不得通过固定 fixture 名称返回预制结论。
+tests/test_domain.py 覆盖现有业务口径；tests/test_transport.py 通过真实本地 HTTP 验证数据到消费端，含 /allocation 路由、未知情景 400 与未知路由 404。tests/test_allocation.py 针对算法设计：整分守恒与 L1 最优取整、最小核 LP 与顺序 LP 核仁、Shapley 哑元公理、手算空核对称博弈的让步（ε=200/3，整分 67）与最小补贴对偶、离散门槛成本下按箱分法被阻挡的证据、不可行大联盟不产出虚构分法、情景同口径敏感性，以及取整后对全部联盟重新裁定稳定结论（分币尾差不得把可接受方案变成亏待某家）。tests/test_acceptance.py 是新接口的公开契约测试，以 RUN_ACCEPTANCE=1 启用，默认跳过。任何接口都不得通过固定 fixture 名称返回预制结论；合成博弈通过替换成本神谕注入，测试期望来自博弈论定义而非硬编码金额。

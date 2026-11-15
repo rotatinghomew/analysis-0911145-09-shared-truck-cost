@@ -35,5 +35,25 @@ class TransportTests(unittest.TestCase):
         self.assertEqual(caught.exception.code, 400)
         caught.exception.close()
 
+    def test_allocation_route_serves_analysis_over_http(self):
+        result = request(self.base, '/allocation', {'case': 'standard'})
+        self.assertEqual(result['snapshot'], load_case('standard')['_snapshot'])
+        self.assertTrue(result['feasible'])
+        self.assertEqual(result['total_cost'], 59800)
+        self.assertTrue(result['allocations'])
+        json.dumps(result, allow_nan=False)
+
+    def test_allocation_unknown_scenario_is_bad_request(self):
+        with self.assertRaises(HTTPError) as caught:
+            request(self.base, '/allocation', {'case': 'standard', 'scenario': 'ghost'})
+        self.assertEqual(caught.exception.code, 400)
+        caught.exception.close()
+
+    def test_unknown_post_route_is_not_found(self):
+        with self.assertRaises(HTTPError) as caught:
+            request(self.base, '/something-else', {'case': 'standard'})
+        self.assertEqual(caught.exception.code, 404)
+        caught.exception.close()
+
     def test_snapshot_changes_with_content(self):
         self.assertNotEqual(load_case('standard')['_snapshot'], load_case('edge')['_snapshot'])
